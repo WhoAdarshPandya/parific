@@ -3,8 +3,39 @@ const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 require("dotenv/config");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+
+mongoose.connect(
+  process.env.DB_URL,
+  {
+    useCreateIndex: true,
+    useFindAndModify: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (!err) {
+      console.log("connected to db");
+    } else {
+      console.log(err);
+    }
+  }
+);
+const schema = new mongoose.Schema({
+  name: {
+    type: String,
+    min: 3,
+  },
+  password: {
+    type: String,
+    max: 50,
+  },
+});
+const userModel = mongoose.model("user", schema);
 
 const app = express();
+
 const port = process.env.PORT || 2002;
 app.use(cors());
 app.use(express.json());
@@ -13,6 +44,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 app.get("/api/change", (req, res) => {
+  let pass = "1234";
+  let hash = bcrypt.hashSync(pass, 10);
+  console.log(hash);
+  let isValid = bcrypt.compareSync("1234", hash);
+  console.log(isValid);
+  userModel.insertMany([{ name: "adarsh", password: hash }]);
   res.json({ msg: "working", status: 200 });
 });
 app.get("*", (req, res) => {
