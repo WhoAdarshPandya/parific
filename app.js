@@ -12,6 +12,9 @@ app.use(express.static("client/build"));
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
+app.get("/api/change", (req, res) => {
+  res.json({ msg: "working", status: 200 });
+});
 app.get("*", (req, res) => {
   res.json({ msg: "not found", status: 404 });
 });
