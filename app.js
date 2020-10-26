@@ -6,6 +6,8 @@ require("dotenv/config");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+// this is just example
+
 mongoose.connect(
   process.env.DB_URL,
   {
