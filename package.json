@@ -8,8 +8,7 @@
     "start": "node app.js",
     "server": "nodemon app.js",
     "dev":"concurrently \"npm run server\" \"npm run client\"",
-    "deploy":"git push heroku master",
-    "build":"npm run build --prefix client"
+    "deploy":"git push heroku master"
   },
   "keywords": [],
   "author": "Adarsh Pandya",
