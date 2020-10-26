@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 app.get("/api/change", (req, res) => {
   res.json({ msg: "working", status: 200 });
 });
-app.get("*", (req, res) => {
-  res.json({ msg: "not found", status: 404 });
-});
+// app.get("*", (req, res) => {
+//   res.json({ msg: "not found", status: 404 });
+// });
 app.listen(port, () => console.log("app is running on port 2002"));
