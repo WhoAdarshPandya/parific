@@ -1,0 +1,43 @@
+.login__main {
+    height: 100%;
+    width: 100%;
+}
+
+.d-flex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.features,
+.login__input {
+    width: 90%;
+    margin: 0 auto;
+    height: 70vh;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+.asset {
+    height: 100%;
+    width: 50%;
+}
+
+.asset-1 {
+    float: left;
+    clear: both;
+}
+
+.asset-2 {
+    clear: both;
+    float: right;
+    clear: both;
+}
+
+.login-header {
+    text-align: center;
+}
