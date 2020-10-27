@@ -3,7 +3,7 @@ import { Button, Grid, TextField } from "@material-ui/core";
 import logo1 from "../../assets/social1.svg";
 import logo2 from "../../assets/social2.svg";
 import "./Login.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -48,12 +48,12 @@ function Login() {
             </Button>
             <br />
 
-            <Link style={{ textAlign: "center" }} to="/signup">
+            {/* <Link style={{ textAlign: "center" }} to="/signup">
               Forgot Password
             </Link>
             <Link style={{ textAlign: "end" }} to="/signup">
               Signup
-            </Link>
+            </Link> */}
           </div>
         </Grid>
       </Grid>
