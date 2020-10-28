@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
+import { MuiThemeProvider } from "@material-ui/core";
+import { theme } from "./theme/theme";
+import Welcome from "./components/Welcome/Welcome";
 
 function App() {
-  // const [isLoggedIn, setIsLoggedin] = useState(false);
+  const [isLoggedIn] = useState(false);
   return (
     <Router>
-      <div className="MainContainer">
-        <div className="App">
-          <Route exact path="/" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Link to="/login">click to login</Link>
+      <MuiThemeProvider theme={theme}>
+        <div className="MainContainer">
+          <div className="App">
+            {isLoggedIn ? <p>app here</p> : <Welcome />}
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     </Router>
   );
 }

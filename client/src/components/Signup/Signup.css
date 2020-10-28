@@ -1,0 +1,50 @@
+.signup__main {
+    height: 100%;
+    width: 100%;
+}
+
+.features,
+.signup__input {
+    width: 90%;
+    margin: 0 auto;
+    height: 70vh;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+p {
+    text-align: justify;
+}
+
+.asset {
+    height: 100%;
+    width: 50%;
+}
+
+.asset-1 {
+    float: left;
+    clear: both;
+}
+
+.asset-2 {
+    clear: both;
+    float: right;
+    clear: both;
+}
+
+.login-header {
+    text-align: center;
+}
+
+.badge {
+    height: 90px;
+    width: 90px;
+    margin: 0 auto !important;
+}
+
+.avatar {
+    width: 90px !important;
+    height: 90px !important;
+}

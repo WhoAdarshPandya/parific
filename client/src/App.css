@@ -7,11 +7,16 @@
     justify-content: center;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .App {
     /* background: red; */
     width: 70%;
     height: 80vh;
     border-radius: 10px;
+    display: flex;
     /* background: #6C63FF; */
     background: #eee !important;
     box-shadow: 37px 37px 74px #5c54d9,
