@@ -47,4 +47,9 @@ p {
 .avatar {
     width: 90px !important;
     height: 90px !important;
+    border: 1px solid #4e4e4e;
+}
+
+.parag {
+    color: #4e4e4e;
 }
