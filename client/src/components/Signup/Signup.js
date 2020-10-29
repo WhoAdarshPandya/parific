@@ -19,6 +19,7 @@ import { UploadImage } from "../../config/firebaseStorage";
 import { getImageDownloadUrl } from "../../config/imgData";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Signup.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
+
+const variants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: 300 },
+};
 
 function Signup() {
   const history = useHistory();
@@ -138,30 +144,45 @@ function Signup() {
                   <Avatar src={imgUrl} className="avatar" />
                 </Badge>
                 <br />
+                {/* <motion.div
+                  // initial={{ opacity: 0, x: 300 }}
+                  animate={isNextClicked ? "open" : "closed"}
+                  variants={variants}
+                > */}
                 <TextField
                   value={pass}
                   onChange={(e) => {
                     setPass(e.target.value);
                   }}
+                  style={{ width: "100%" }}
                   type="password"
                   label="Passoword"
                   variant="outlined"
                 />
+                {/* </motion.div> */}
                 <br />
+                {/* <motion.div
+                  // initial={{ opacity: 0, x: 300 }}
+                  animate={isNextClicked ? "open" : "closed"}
+                  variants={variants}
+                > */}
                 <TextField
                   value={cpass}
                   onChange={(e) => {
                     setCPass(e.target.value);
                   }}
+                  style={{ width: "100%" }}
                   label="Confirm Password"
                   variant="outlined"
                   type="password"
                 />
+                {/* </motion.div> */}
                 <br />
               </>
             ) : (
               <>
                 <Typography
+                  // animate={{ y: 20 }}
                   variant="h4"
                   color="primary"
                   style={{ textAlign: "center" }}
@@ -169,32 +190,53 @@ function Signup() {
                   Signup
                 </Typography>
                 <br />
-                <TextField
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  label="Name"
-                  variant="outlined"
-                />
+                <motion.div
+                  initial={{ opacity: 0, x: 300 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <TextField
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    style={{ width: "100%" }}
+                    label="Name"
+                    variant="outlined"
+                  />
+                </motion.div>
                 <br />
-                <TextField
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  label="Email"
-                  variant="outlined"
-                />
+                <motion.div
+                  initial={{ opacity: 0, x: 300 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <TextField
+                    value={email}
+                    style={{ width: "100%" }}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    label="Email"
+                    variant="outlined"
+                  />
+                </motion.div>
                 <br />
-                <TextField
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
-                  label="User Name"
-                  variant="outlined"
-                />
+                <motion.div
+                  initial={{ opacity: 0, x: 300 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <TextField
+                    value={username}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                    style={{ width: "100%" }}
+                    label="User Name"
+                    variant="outlined"
+                  />
+                </motion.div>
                 <br />
                 <Button
                   style={{
