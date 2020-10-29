@@ -238,36 +238,44 @@ function Signup() {
                   />
                 </motion.div>
                 <br />
-                <Button
-                  style={{
-                    height: "40px",
-                    width: "90px",
-                    marginLeft: "auto",
-                  }}
-                  color="primary"
-                  size="small"
-                  variant="contained"
-                  onClick={() => {
-                    handleFirst();
-                  }}
-                  endIcon={<NavigateNextIcon />}
+                <motion.div
+                  style={{ marginLeft: "auto" }}
+                  whileHover={{ scale: 0.9 }}
+                  whileTap={{ scale: 1.1 }}
                 >
-                  Next
-                </Button>
-
+                  <Button
+                    style={{
+                      height: "40px",
+                      width: "90px",
+                      marginLeft: "auto",
+                    }}
+                    color="primary"
+                    size="small"
+                    variant="contained"
+                    onClick={() => {
+                      handleFirst();
+                    }}
+                    endIcon={<NavigateNextIcon />}
+                  >
+                    Next
+                  </Button>
+                </motion.div>
                 <br />
               </>
             )}
-            <Button
-              variant="contained"
-              disabled={isSignupDisabled}
-              color="primary"
-              onClick={() => {
-                handleSubmit();
-              }}
-            >
-              Signup
-            </Button>
+            <motion.div whileHover={{ scale: 0.9 }} whileTap={{ scale: 1.1 }}>
+              <Button
+                variant="contained"
+                className={isSignupDisabled ? "w-100 disabled" : "w-100"}
+                disabled={isSignupDisabled}
+                color="primary"
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                Signup
+              </Button>
+            </motion.div>
             <br />
             <Link className="link" style={{ textAlign: "end" }} to="/login">
               Login

@@ -3,6 +3,7 @@ import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import logo1 from "../../assets/social1.svg";
 import logo2 from "../../assets/social2.svg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Login.css";
 
 function Login() {
@@ -34,23 +35,51 @@ function Login() {
         </Grid>
         <Grid item md={6}>
           <div className="login__input">
-            <Typography variant="h4" style={{ textAlign: "center" }}>
+            <Typography
+              color="primary"
+              variant="h4"
+              style={{ textAlign: "center" }}
+            >
               Login
             </Typography>
             <br />
-            <TextField variant="outlined" value="" label="Email" />
+            <motion.div
+              initial={{ opacity: 0, y: 500 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TextField
+                variant="outlined"
+                className="w-100"
+                value=""
+                label="Email"
+              />
+            </motion.div>
             <br />
-            <TextField
-              variant="outlined"
-              value=""
-              label="Password"
-              type="password"
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 500 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+            >
+              <TextField
+                variant="outlined"
+                value=""
+                className="w-100"
+                label="Password"
+                type="password"
+              />
+            </motion.div>
             <br />
             <br />
-            <Button variant="contained" color="primary">
-              Login
-            </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 500 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.37 }}
+            >
+              <Button className="w-100" variant="contained" color="primary">
+                Login
+              </Button>
+            </motion.div>
             <br />
 
             <Link className="link" style={{ textAlign: "center" }} to="/signup">
