@@ -5,7 +5,7 @@ const helmet = require("helmet");
 require("dotenv/config");
 const routes = require("./routes/routes");
 require("./config/db_operations");
-// this is just example
+// this is just example don
 
 const app = express();
 

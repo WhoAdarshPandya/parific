@@ -5,8 +5,17 @@ import logo2 from "../../assets/social2.svg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Login.css";
+import { loginApiCall } from "../../api/apiReq";
 
 function Login() {
+  const handleLogin = async () => {
+    console.log("here we go");
+    let data = await loginApiCall({
+      email: "jb@gmail.com",
+      password: "1234",
+    });
+    console.log(data);
+  };
   return (
     <div className="login__main">
       <Grid container className="d-flex">
@@ -76,7 +85,14 @@ function Login() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.37 }}
             >
-              <Button className="w-100" variant="contained" color="primary">
+              <Button
+                onClick={() => {
+                  handleLogin();
+                }}
+                className="w-100"
+                variant="contained"
+                color="primary"
+              >
                 Login
               </Button>
             </motion.div>

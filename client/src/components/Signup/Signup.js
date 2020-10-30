@@ -21,6 +21,7 @@ import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Signup.css";
+import { SignupApiCall } from "../../api/apiReq";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -41,7 +42,7 @@ function Signup() {
   const [isNextClicked, setIsNext] = useState(false);
   const [isSignupDisabled, setisSignupDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
-  const [, setProfileUrl] = useState("");
+  const [profileUrl, setProfileUrl] = useState("");
   // ? user data
   const [name, setName] = useState("User 👋");
   const [email, setEmail] = useState("");
@@ -63,10 +64,19 @@ function Signup() {
     if (profile) {
       setLoading(true);
       await UploadImage(profile);
-      setTimeout(() => {
+      setTimeout(async () => {
         setProfileUrl(getImageDownloadUrl());
         setLoading(false);
         if (getImageDownloadUrl() !== "") {
+          // ! api call
+          let data = await SignupApiCall({
+            name: "jill",
+            email: "jb@gmail.com",
+            user_name: "jillbhat",
+            password: "1234",
+            profile: getImageDownloadUrl(),
+          });
+          console.log(data);
           enqueueSnackbar("Signup Successful", { variant: "success" });
           history.push("/login");
         } else {
