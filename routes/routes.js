@@ -85,7 +85,7 @@ router.get("/api/main", (req, res) => {
 router.get("/api/main/securedRoute", authUser, (req, res) => {
   res.json({ msg: "this is protected route", data: req.user });
 });
-
+// just to
 router.get("/api/v1/getprofile", authUser, async (req, res) => {
   const user = await userCollection.findOne({ user_id: req.user.userID });
   res.json({ data: user });
