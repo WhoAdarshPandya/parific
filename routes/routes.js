@@ -87,4 +87,6 @@ router.get("/api/main/securedRoute", authUser, (req, res) => {
   res.json({ msg: "this is protected route", data: req.user });
 });
 
+//this is comment
+
 module.exports = router;
