@@ -55,6 +55,7 @@ router.post("/api/v1/login", async (req, res) => {
       console.log("error");
       console.log(err);
     } else {
+      res.clearCookie("token");
       if (result) {
         let isValidUser = bcrypt.compareSync(
           req.body.password,
@@ -62,10 +63,8 @@ router.post("/api/v1/login", async (req, res) => {
         );
         if (isValidUser) {
           const token = jwtTokenGenerator(
-            JSON.stringify({ userID: "id here" })
+            JSON.stringify({ userID: result.user_id })
           );
-          console.log(token);
-          res.clearCookie("token");
           res.cookie("token", token, { secure: false });
           return res.json({ msg: "login success", token, success: true });
         } else {
@@ -87,6 +86,10 @@ router.get("/api/main/securedRoute", authUser, (req, res) => {
   res.json({ msg: "this is protected route", data: req.user });
 });
 
+router.get("/api/v1/getprofile", authUser, async (req, res) => {
+  const user = await userCollection.findOne({ user_id: req.user.userID });
+  res.json({ data: user });
+});
 //this is comment
 
 module.exports = router;

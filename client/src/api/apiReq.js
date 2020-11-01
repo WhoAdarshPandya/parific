@@ -35,3 +35,20 @@ export const loginApiCall = async (data) => {
     });
   return responseData;
 };
+
+export const getUserData = async () => {
+  let responseData = null;
+  await axios
+    .get("/api/v1/getprofile", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      responseData = res.data;
+    })
+    .catch((e) => {
+      responseData = e;
+    });
+  return responseData;
+};

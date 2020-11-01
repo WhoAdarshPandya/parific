@@ -70,10 +70,10 @@ function Signup() {
         if (getImageDownloadUrl() !== "") {
           // ! api call
           let data = await SignupApiCall({
-            name: "jill",
-            email: "jb@gmail.com",
-            user_name: "jillbhat",
-            password: "1234",
+            name,
+            email,
+            user_name: username,
+            password: pass,
             profile: getImageDownloadUrl(),
           });
           console.log(data);

@@ -6,6 +6,7 @@ import Welcome from "./components/Welcome/Welcome";
 import { SnackbarProvider } from "notistack";
 import { motion } from "framer-motion";
 import Cookie from "js-cookie";
+import Parific from "./components/Parific/Parific";
 import "./App.css";
 
 function App() {
@@ -30,9 +31,7 @@ function App() {
             transition={{ type: "spring", duration: 0.3, stiffness: 150 }}
             className="MainContainer"
           >
-            <div className="App">
-              {isLoggedIn ? <p>app here</p> : <Welcome />}
-            </div>
+            <div className="App">{isLoggedIn ? <Parific /> : <Welcome />}</div>
           </motion.div>
         </SnackbarProvider>
       </MuiThemeProvider>

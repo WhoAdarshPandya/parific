@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import logo1 from "../../assets/social1.svg";
 import logo2 from "../../assets/social2.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
-import "./Login.css";
 import { loginApiCall } from "../../api/apiReq";
+import { useSnackbar } from "notistack";
+import "./Login.css";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
   const handleLogin = async () => {
-    console.log("here we go");
-    let data = await loginApiCall({
-      email: "jb@gmail.com",
-      password: "1234",
-    });
-    console.log(data);
+    // ?validation
+    if (
+      email !== null &&
+      email !== "" &&
+      password !== null &&
+      password !== ""
+    ) {
+      // ? validate email using regex
+      // eslint-disable-next-line
+      let mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (mailRegex.test(email)) {
+        let data = await loginApiCall({
+          email,
+          password,
+        });
+        if (data.success) {
+          console.log(data);
+          history.push("/");
+          window.location.reload();
+        } else {
+          enqueueSnackbar(data.msg, { variant: "warning" });
+        }
+      } else {
+        enqueueSnackbar("email is not valid !", { variant: "error" });
+      }
+    } else {
+      enqueueSnackbar("one or more fields are empty...", { variant: "error" });
+    }
   };
   return (
     <div className="login__main">
@@ -60,7 +87,10 @@ function Login() {
               <TextField
                 variant="outlined"
                 className="w-100"
-                value=""
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 label="Email"
               />
             </motion.div>
@@ -72,7 +102,10 @@ function Login() {
             >
               <TextField
                 variant="outlined"
-                value=""
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 className="w-100"
                 label="Password"
                 type="password"
