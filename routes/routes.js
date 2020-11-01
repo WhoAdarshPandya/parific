@@ -5,7 +5,9 @@ const {
   loginValidaton,
 } = require("../models/userValidatorModel");
 const userCollection = require("../models/userModel");
+const uuid = require("uuid");
 const mongoose = require("../config/dbconfig");
+const { jwtTokenGenerator, authUser } = require("../config/jwtTokens");
 
 router.post("/api/v1/signup", async (req, res) => {
   if (req.body === null || req.body === undefined || req.body === "") {
@@ -22,6 +24,7 @@ router.post("/api/v1/signup", async (req, res) => {
   await userCollection
     .insertMany([
       {
+        user_id: uuid.v4(),
         name: req.body.name,
         email: req.body.email,
         userName: req.body.user_name,
@@ -58,7 +61,13 @@ router.post("/api/v1/login", async (req, res) => {
           result.password
         );
         if (isValidUser) {
-          return res.json({ msg: "login success", success: true });
+          const token = jwtTokenGenerator(
+            JSON.stringify({ userID: "id here" })
+          );
+          console.log(token);
+          res.clearCookie("token");
+          res.cookie("token", token, { secure: false });
+          return res.json({ msg: "login success", token, success: true });
         } else {
           return res.json({ msg: "wrong email/password", success: false });
         }
@@ -67,6 +76,15 @@ router.post("/api/v1/login", async (req, res) => {
       }
     }
   });
+});
+
+router.get("/api/main", (req, res) => {
+  console.log(req.cookies);
+  res.json(req.cookies);
+});
+
+router.get("/api/main/securedRoute", authUser, (req, res) => {
+  res.json({ msg: "this is protected route", data: req.user });
 });
 
 module.exports = router;

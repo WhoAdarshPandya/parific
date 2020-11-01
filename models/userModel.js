@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const userModel = new mongoose.Schema({
+  user_id: { type: String, max: 30, required: true },
   name: {
     type: String,
     max: 25,
