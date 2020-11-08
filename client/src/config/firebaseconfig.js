@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/analytics";
+import "firebase/auth";
 require("dotenv/config");
 
 const config = {
@@ -15,7 +16,7 @@ const config = {
   measurementId: process.env.REACT_APP_measurementId,
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(config).auth();
 firebase.analytics();
 export const projectStorage = firebase.storage();
 export const projectFireStore = firebase.firestore();

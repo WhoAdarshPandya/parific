@@ -30,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: 300 },
-};
-
 function Signup() {
   const history = useHistory();
   const [profile, setProfile] = useState(null);
@@ -42,9 +37,9 @@ function Signup() {
   const [isNextClicked, setIsNext] = useState(false);
   const [isSignupDisabled, setisSignupDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
-  const [profileUrl, setProfileUrl] = useState("");
+  const [, setProfileUrl] = useState("");
   // ? user data
-  const [name, setName] = useState("User 👋");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [pass, setPass] = useState("");
@@ -52,12 +47,30 @@ function Signup() {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const handleFirst = () => {
-    setIsNext(true);
-    setisSignupDisabled((prev) => !prev);
+    // ? validation
+    if (
+      name !== "" &&
+      name !== null &&
+      email !== "" &&
+      email !== null &&
+      username !== "" &&
+      username !== null
+    ) {
+      setIsNext(true);
+      setisSignupDisabled((prev) => !prev);
+    } else {
+      enqueueSnackbar("one or more fields are empty...", { variant: "error" });
+    }
   };
   const handleChangeProfile = (e) => {
-    setProfile(e.target.files[0]);
-    setImgUrl(URL.createObjectURL(e.target.files[0]));
+    const selected = ["img/png", "img/jpg"];
+    if (selected.includes(e.target.files[0].name)) {
+      setProfile(e.target.files[0]);
+      setImgUrl(URL.createObjectURL(e.target.files[0]));
+    } else {
+      enqueueSnackbar("provide valid image", { variant: "error" });
+      setProfile("");
+    }
   };
 
   const handleSubmit = async () => {
@@ -68,23 +81,60 @@ function Signup() {
         setProfileUrl(getImageDownloadUrl());
         setLoading(false);
         if (getImageDownloadUrl() !== "") {
-          // ! api call
-          let data = await SignupApiCall({
-            name,
-            email,
-            user_name: username,
-            password: pass,
-            profile: getImageDownloadUrl(),
-          });
-          console.log(data);
-          enqueueSnackbar("Signup Successful", { variant: "success" });
-          history.push("/login");
+          // ? data validation & sanitization
+          // eslint-disable-next-line
+          let mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          if (
+            name !== "" &&
+            email !== "" &&
+            username !== "" &&
+            pass !== "" &&
+            cpass !== ""
+          ) {
+            // ? check mail
+            if (mailRegex.test(email)) {
+              if (pass === cpass) {
+                // ! api call
+                let data = await SignupApiCall({
+                  name: name.trim().toLowerCase(),
+                  email: email.trim().toLowerCase(),
+                  user_name: username.trim().toLowerCase(),
+                  password: pass,
+                  profile: getImageDownloadUrl(),
+                });
+
+                // ?debug
+                console.log(data);
+                if (data.success) {
+                  enqueueSnackbar("Signup Successful", { variant: "success" });
+                  history.push("/login");
+                } else {
+                  enqueueSnackbar(data.msg, { variant: "error" });
+                }
+              } else {
+                enqueueSnackbar(
+                  "please provide same password in password and confirm password",
+                  { variant: "error" }
+                );
+              }
+            } else {
+              enqueueSnackbar("please provide valid mail", {
+                variant: "error",
+              });
+            }
+          } else {
+            enqueueSnackbar("one or more fields are empty...", {
+              variant: "error",
+            });
+          }
         } else {
-          enqueueSnackbar("some error", { variant: "error" });
+          enqueueSnackbar("profile upload error", { variant: "error" });
         }
       }, 5000);
     } else {
-      alert("error 123");
+      enqueueSnackbar("it's always a good option to put a profile :)", {
+        variant: "info",
+      });
     }
   };
   return (
@@ -211,7 +261,7 @@ function Signup() {
                       setName(e.target.value);
                     }}
                     style={{ width: "100%" }}
-                    label="Name"
+                    label="Your name👋"
                     variant="outlined"
                   />
                 </motion.div>

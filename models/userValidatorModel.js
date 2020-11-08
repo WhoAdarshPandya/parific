@@ -2,7 +2,7 @@ const joi = require("@hapi/joi");
 
 const signupUserValidation = (data) => {
   let signupSchema = joi.object({
-    name: joi.string().required().max(25).min(3).token().lowercase().trim(),
+    name: joi.string().required().max(25).min(3).lowercase().trim(),
     user_name: joi
       .string()
       .lowercase()
@@ -12,7 +12,7 @@ const signupUserValidation = (data) => {
       .max(30)
       .trim(),
     email: joi.string().lowercase().email().required().trim(),
-    password: joi.string().required(),
+    password: joi.string().required().min(6).max(25),
     profile: joi.string().trim(),
   });
   return signupSchema.validate(data);

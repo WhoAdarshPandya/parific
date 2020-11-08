@@ -131,7 +131,7 @@ function Login() {
             </motion.div>
             <br />
 
-            <Link className="link" style={{ textAlign: "center" }} to="/signup">
+            <Link className="link" style={{ textAlign: "center" }} to="/login">
               Forgot Password
             </Link>
             <Link className="link" style={{ textAlign: "end" }} to="/signup">

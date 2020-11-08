@@ -19,7 +19,7 @@ router.post("/api/v1/signup", async (req, res) => {
   if (error)
     return res
       .status(200)
-      .json({ message: error.details[0].message, success: false });
+      .json({ msg: error.details[0].message, success: false });
   let hash = bcrypt.hashSync(req.body.password, 10);
   await userCollection
     .insertMany([
@@ -37,7 +37,13 @@ router.post("/api/v1/signup", async (req, res) => {
       res.status(200).json({ msg: "ok signup", success: true });
     })
     .catch((e) => {
-      res.status(200).json({ msg: "not ok", error: e, success: false });
+      res
+        .status(200)
+        .json({
+          msg: "user name is already taken :(",
+          error: e,
+          success: false,
+        });
     });
 });
 
