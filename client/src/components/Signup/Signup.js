@@ -63,13 +63,14 @@ function Signup() {
     }
   };
   const handleChangeProfile = (e) => {
-    const selected = ["img/png", "img/jpg"];
-    if (selected.includes(e.target.files[0].name)) {
+    const selected = ["image/png", "image/jpeg"];
+    console.log(selected.includes(e.target.files[0].type));
+    if (selected.includes(e.target.files[0].type)) {
       setProfile(e.target.files[0]);
       setImgUrl(URL.createObjectURL(e.target.files[0]));
     } else {
       enqueueSnackbar("provide valid image", { variant: "error" });
-      setProfile("");
+      // setProfile("");
     }
   };
 
