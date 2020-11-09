@@ -7,6 +7,7 @@ const {
 const userCollection = require("../models/userModel");
 const uuid = require("uuid");
 const mongoose = require("../config/dbconfig");
+const moment = require("moment");
 const { jwtTokenGenerator, authUser } = require("../config/jwtTokens");
 
 router.post("/api/v1/signup", async (req, res) => {
@@ -31,19 +32,18 @@ router.post("/api/v1/signup", async (req, res) => {
         password: hash,
         profile: req.body.profile,
         accountType: true,
+        date: Date.now(),
       },
     ])
     .then((ress) => {
       res.status(200).json({ msg: "ok signup", success: true });
     })
     .catch((e) => {
-      res
-        .status(200)
-        .json({
-          msg: "user name is already taken :(",
-          error: e,
-          success: false,
-        });
+      res.status(200).json({
+        msg: "user name is already taken :(",
+        error: e,
+        success: false,
+      });
     });
 });
 
@@ -91,11 +91,20 @@ router.get("/api/main", (req, res) => {
 router.get("/api/main/securedRoute", authUser, (req, res) => {
   res.json({ msg: "this is protected route", data: req.user });
 });
-// just to
+
 router.get("/api/v1/getprofile", authUser, async (req, res) => {
   const user = await userCollection.findOne({ user_id: req.user.userID });
-  res.json({ data: user });
+  res.json({
+    data: {
+      id: user.user_id,
+      name: user.name,
+      username: user.userName,
+      email: user.email,
+      profile: user.profile,
+      private: user.accountType,
+      date: moment(+user.date).format("DD/MMM/YYYY"),
+    },
+  });
 });
-//this is comment
 
 module.exports = router;

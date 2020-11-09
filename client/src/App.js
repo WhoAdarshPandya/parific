@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { MuiThemeProvider } from "@material-ui/core";
+import { MuiThemeProvider, IconButton } from "@material-ui/core";
 import { theme } from "./theme/theme";
 import Welcome from "./components/Welcome/Welcome";
 import { SnackbarProvider } from "notistack";
 import { motion } from "framer-motion";
 import Cookie from "js-cookie";
 import Parific from "./components/Parific/Parific";
+import CloseIcon from "@material-ui/icons/Close";
 import "./App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const notistackRef = React.createRef();
+  const onClickDismiss = (key) => () => {
+    notistackRef.current.closeSnackbar(key);
+  };
   useEffect(() => {
     const token = Cookie.get("token");
     if (token !== "" && token !== null && token !== undefined) {
@@ -23,7 +28,16 @@ function App() {
   return (
     <Router>
       <MuiThemeProvider theme={theme}>
-        <SnackbarProvider maxSnack={3}>
+        <SnackbarProvider
+          ref={notistackRef}
+          action={(key) => (
+            <IconButton color="inherit" onClick={onClickDismiss(key)}>
+              <CloseIcon />
+            </IconButton>
+          )}
+          preventDuplicate={true}
+          maxSnack={3}
+        >
           <motion.div
             initial={{ opacity: 0, y: "-200vh" }}
             animate={{ opacity: 1, y: 0 }}

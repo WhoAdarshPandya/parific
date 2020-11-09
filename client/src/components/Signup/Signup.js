@@ -70,7 +70,7 @@ function Signup() {
       setImgUrl(URL.createObjectURL(e.target.files[0]));
     } else {
       enqueueSnackbar("provide valid image", { variant: "error" });
-      // setProfile("");
+      setProfile("");
     }
   };
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getUserData } from "../../api/apiReq";
+import "./Parific.css";
 
 function Parific() {
   useEffect(() => {
@@ -8,7 +9,7 @@ function Parific() {
       return data;
     };
     getData().then((res) => {
-      //   console.log(res);
+      console.log(res);
     });
   });
   return <div>app here</div>;
