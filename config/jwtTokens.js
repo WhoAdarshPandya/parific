@@ -18,7 +18,10 @@ const authUser = (req, res, next) => {
   } catch (error) {
     res
       .status(200)
-      .json({ message: "token expired | something went wrong...", success: 0 });
+      .json({
+        message: "token expired | something went wrong...",
+        success: false,
+      });
   }
 };
 

@@ -42,7 +42,7 @@ function App() {
             initial={{ opacity: 0, y: "-200vh" }}
             animate={{ opacity: 1, y: 0 }}
             // bounce : 0.5
-            transition={{ type: "spring", duration: 0.3, stiffness: 150 }}
+            transition={{ type: "spring", duration: 0.3, stiffness: 120 }}
             className="MainContainer"
           >
             <div className="App">{isLoggedIn ? <Parific /> : <Welcome />}</div>

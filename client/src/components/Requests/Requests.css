@@ -1,0 +1,42 @@
+.request_container {
+    width: 100%;
+    height: 475px;
+    overflow-y: scroll;
+    border-top: 0.5px solid #c3c3c3;
+    /* display: flex; */
+    /* background: rebeccapurple; */
+    /* padding: 20px; */
+}
+
+.test-bg {
+    border: 1px solid red;
+    background: bisque;
+}
+
+.list-extrapadding-remove {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.accordin {
+    padding: 0px;
+    padding-right: 12px;
+    background-color: transparent !important;
+}
+
+.svg {
+    height: 250px;
+    width: 250px;
+    display: block !important;
+    margin: 0 auto;
+}
+
+
+.border-none {
+    border: none !important;
+}
+
+.dot {
+    color: #c3c3c3;
+    text-align: center;
+}

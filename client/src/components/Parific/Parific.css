@@ -1,0 +1,47 @@
+.parific-container {
+    /* background-color: burlywood; */
+    width: 100% !important;
+    /* flex: 12;
+    display: flex; */
+}
+
+
+/* .feed-trial {
+    flex: 8;
+    border-right: 1px solid #c3c3c3;
+    overflow-y: scroll;
+    background: #eee;
+} */
+
+/* .content-trial {
+    flex: 4;
+} */
+
+/* @media only screen and (max-width: 600px) {
+    .parific-container {
+        flex-direction: column;
+    }
+
+    .feed-trial {
+        background: rebeccapurple;
+    }
+
+    .content-trial {
+        background: red;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .parific-container {
+        flex-direction: column;
+    }
+
+    .feed-trial {
+        background: rebeccapurple;
+        border: 0px;
+    }
+
+    .content-trial {
+        background: red;
+    }
+} */

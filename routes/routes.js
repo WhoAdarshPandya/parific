@@ -104,6 +104,7 @@ router.get("/api/v1/getprofile", authUser, async (req, res) => {
       private: user.accountType,
       date: moment(+user.date).format("DD/MMM/YYYY"),
     },
+    success: true,
   });
 });
 

@@ -26,7 +26,7 @@ function Login() {
       let mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (mailRegex.test(email)) {
         let data = await loginApiCall({
-          email,
+          email: email.toLowerCase(),
           password,
         });
         if (data.success) {
@@ -130,7 +130,6 @@ function Login() {
               </Button>
             </motion.div>
             <br />
-
             <Link className="link" style={{ textAlign: "center" }} to="/login">
               Forgot Password
             </Link>
