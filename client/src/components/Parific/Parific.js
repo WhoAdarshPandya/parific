@@ -40,9 +40,9 @@ function Parific() {
         console.log("setting");
         setUserData(res.data);
       } else {
-        // Cookie.remove("token");
-        // window.location.reload();
-        // enqueueSnackbar("something went wrong", { variant: "warning" });
+        Cookie.remove("token");
+        window.location.reload();
+        enqueueSnackbar("something went wrong", { variant: "warning" });
       }
     });
     // eslint-disable-next-line

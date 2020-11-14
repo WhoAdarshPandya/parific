@@ -11,8 +11,14 @@ import {
   Avatar,
   ListItemText,
   Typography,
+  ListItemSecondaryAction,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import TelegramIcon from "@material-ui/icons/Telegram";
+import SecurityIcon from "@material-ui/icons/Security";
+// import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
 import "./Chat.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +53,7 @@ function Chat() {
       profile:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
       name: "Shailee Bhatt",
-      msg: "hey darling",
+      msg: "hey hello sjdlkj",
       isClicked: false,
     },
     {
@@ -141,7 +147,62 @@ function Chat() {
       </div>
       <div className="chat_window">
         {isChatActive ? (
-          <div className="main_chatwin"></div>
+          <div className="main_chatwin">
+            <Paper elevation={0} variant="outlined" className="current_contact">
+              <List style={{ paddingTop: "0px", paddingBottom: "0px" }}>
+                <ListItem style={{ paddingTop: "0px", paddingBottom: "0px" }}>
+                  <ListItemAvatar>
+                    <Avatar
+                      src="https://images.unsplash.com/photo-1499854413229-6d1c92ff39ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=802&q=80"
+                      alt=""
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <Typography style={{ color: "#000" }}>
+                        Adarsh Pandya
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography variant="subtitle2" style={{ color: "grey" }}>
+                        Adarsh Pandya
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItemSecondaryAction>
+                  <IconButton color="primary">
+                    <MoreVertOutlinedIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </List>
+            </Paper>
+            <div className="chats_main_msgbox"></div>
+            {/* <div className="chat_sender_input">
+
+            </div> */}
+            <Paper elevation={0} className="send_input">
+              <IconButton className={classes.iconButton}>
+                <SecurityIcon />
+              </IconButton>
+              <IconButton className={classes.iconButton}>
+                <InsertEmoticonIcon />
+              </IconButton>
+              <InputBase
+                style={{ width: "76%" }}
+                value={searchName}
+                onChange={(e) => {
+                  setSearchName(e.target.value);
+                }}
+                className={classes.input}
+                placeholder="Send a message"
+                inputProps={{ "aria-label": "Send a message" }}
+              />
+              <IconButton>
+                <TelegramIcon />
+              </IconButton>
+            </Paper>
+          </div>
         ) : (
           <div className="left-portion__hero ">
             <div className="hr-animation">
