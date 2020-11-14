@@ -16,6 +16,7 @@ import { style } from "../../theme/theme";
 import NewsFeed from "../NewsFeed/NewsFeed";
 import Requests from "../Requests/Requests";
 // •
+import Chat from "../Chat/Chat";
 import "./Parific.css";
 
 function Parific() {
@@ -23,7 +24,7 @@ function Parific() {
   const { enqueueSnackbar } = useSnackbar();
   const [userData, setUserData] = useRecoilState(userAtom);
 
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(3);
   const detectDevice = window.mobileCheck();
   useEffect(() => {
     const getData = async () => {
@@ -39,9 +40,9 @@ function Parific() {
         console.log("setting");
         setUserData(res.data);
       } else {
-        Cookie.remove("token");
-        window.location.reload();
-        enqueueSnackbar("something went wrong", { variant: "warning" });
+        // Cookie.remove("token");
+        // window.location.reload();
+        // enqueueSnackbar("something went wrong", { variant: "warning" });
       }
     });
     // eslint-disable-next-line
@@ -94,7 +95,7 @@ function Parific() {
           slide n°3
         </div>
         <div className="chat" style={Object.assign({}, style.slide)}>
-          slide n°4
+          <Chat />
         </div>
         <div className="search" style={Object.assign({}, style.slide)}>
           slide n°5

@@ -281,7 +281,7 @@ function Requests() {
                         secondary={handleSecondaryInput(friend)}
                       />
                       <ListItemSecondaryAction>
-                        <Button color="secondary">PAIR</Button>
+                        <Button color="primary">PAIR</Button>
                         <Button>
                           <Typography color="error">REJECT</Typography>
                         </Button>
@@ -329,7 +329,7 @@ function Requests() {
                         secondary={handleSecondaryInput(friend)}
                       />
                       <ListItemSecondaryAction>
-                        <Button color="secondary">PAIR</Button>
+                        <Button color="primary">PAIR</Button>
                         <Button>
                           <Typography color="error">REJECT</Typography>
                         </Button>
