@@ -12,7 +12,11 @@ import {
   ListItemText,
   Typography,
   ListItemSecondaryAction,
+  Popover,
 } from "@material-ui/core";
+import Picker from "emoji-picker-react";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { css } from "@emotion/css";
 import SearchIcon from "@material-ui/icons/Search";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import SecurityIcon from "@material-ui/icons/Security";
@@ -30,10 +34,17 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
 }));
-
+const root = css({
+  height: "100%",
+  width: "100%",
+});
 function Chat() {
   const [searchName, setSearchName] = useState("");
-  const [isChatActive, setIsChatActive] = useState(true);
+  const [msg, setMsg] = useState("");
+  const [isChatActive] = useState(true);
+  const [openEmojiBoard, setEmojiBoard] = useState(false);
+  const [isAnonymouschatActive, setIsAnonymousChatActive] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
   const [frnds, setFrnds] = useState([
     {
@@ -99,6 +110,30 @@ function Chat() {
       ];
     });
   };
+
+  const handleClick = (event) => {
+    setEmojiBoard(true);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const onEmojiSelection = (event, emojiObject) => {
+    setMsg((prev) => `${prev}${emojiObject.emoji}`);
+  };
+
+  const handleAnonymousButton = (isActive) => {
+    setIsAnonymousChatActive(!isActive);
+    toggleMods(!isActive);
+  };
+
+  const toggleMods = (bool) => {
+    bool
+      ? document
+          .getElementsByClassName("main_chatwin")[0]
+          .classList.add("anonymouschat")
+      : document
+          .getElementsByClassName("main_chatwin")[0]
+          .classList.remove("anonymouschat");
+  };
   return (
     <div className="chat_container">
       <div className="chat_sidebar_users">
@@ -128,7 +163,7 @@ function Chat() {
                 }}
                 key={frnd.name}
                 button
-                className={frnd.isClicked ? "list-user" : ""}
+                className={frnd.isClicked ? "list-user hvr" : "hvr"}
               >
                 <ListItemAvatar>
                   <Avatar src={frnd.profile} alt="" />
@@ -177,31 +212,84 @@ function Chat() {
                 </ListItemSecondaryAction>
               </List>
             </Paper>
-            <div className="chats_main_msgbox"></div>
+            <div className="chats_main_msgbox">
+              <ScrollToBottom className={root}>
+                <div className="conversation-start">
+                  <span>Monday, 1:27 PM</span>
+                </div>
+                <div className="bubble you">So, how's your new phone?</div>
+                <div className="bubble you">
+                  You finally have a smartphone :D
+                </div>
+                <div className="bubble me">Drake?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble me">Why aren't you answering?</div>
+                <div className="bubble you">
+                  <div class="dot one"></div>
+                  <div class="dot two"></div>
+                  <div class="dot three"></div>
+                </div>
+              </ScrollToBottom>
+            </div>
             {/* <div className="chat_sender_input">
 
             </div> */}
             <Paper elevation={0} className="send_input">
-              <IconButton className={classes.iconButton}>
+              <IconButton
+                onClick={() => {
+                  handleAnonymousButton(isAnonymouschatActive);
+                }}
+                className={classes.iconButton}
+              >
                 <SecurityIcon />
               </IconButton>
-              <IconButton className={classes.iconButton}>
+              <IconButton onClick={handleClick} className={classes.iconButton}>
                 <InsertEmoticonIcon />
               </IconButton>
               <InputBase
-                style={{ width: "76%" }}
-                value={searchName}
+                autoFocus={true}
+                style={{ width: "75%" }}
+                value={msg}
                 onChange={(e) => {
-                  setSearchName(e.target.value);
+                  setMsg(e.target.value);
                 }}
                 className={classes.input}
                 placeholder="Send a message"
                 inputProps={{ "aria-label": "Send a message" }}
               />
+
               <IconButton>
                 <TelegramIcon />
               </IconButton>
             </Paper>
+            {openEmojiBoard ? (
+              <Popover
+                id="123"
+                open={true}
+                onEscapeKeyDown={() => {
+                  setEmojiBoard(false);
+                }}
+                onBackdropClick={() => {
+                  setEmojiBoard(false);
+                }}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                anchorEl={anchorEl}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <Picker onEmojiClick={onEmojiSelection} />
+              </Popover>
+            ) : null}
           </div>
         ) : (
           <div className="left-portion__hero ">
