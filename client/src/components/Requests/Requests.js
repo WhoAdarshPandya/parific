@@ -344,7 +344,7 @@ function Requests() {
               )}
             </AccordionDetails>
           </Accordion>
-          <p className="dot">•</p>
+          <p className="last_dot">•</p>
         </>
       )}
     </div>

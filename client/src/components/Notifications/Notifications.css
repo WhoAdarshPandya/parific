@@ -1,0 +1,29 @@
+.notification_container {
+    width: 100%;
+    height: 475px !important;
+    overflow-y: scroll;
+    border-top: 0.5px solid #c3c3c3;
+    /* display: flex; */
+}
+
+.notification_header {
+    padding: 10px !important;
+    color: #262626;
+    padding-left: 20px !important;
+}
+
+.py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.notification_list {
+    background: #e1e1e1 !important;
+}
+
+.last_dot {
+    padding: 0 !important;
+    margin-top: 0;
+    color: #c3c3c3;
+    text-align: center;
+}

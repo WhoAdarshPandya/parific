@@ -230,9 +230,9 @@ function Chat() {
                 <div className="bubble me">Why aren't you answering?</div>
                 <div className="bubble me">Why aren't you answering?</div>
                 <div className="bubble you">
-                  <div class="dot one"></div>
-                  <div class="dot two"></div>
-                  <div class="dot three"></div>
+                  <div className="dot one"></div>
+                  <div className="dot two"></div>
+                  <div className="dot three"></div>
                 </div>
               </ScrollToBottom>
             </div>
@@ -252,7 +252,6 @@ function Chat() {
                 <InsertEmoticonIcon />
               </IconButton>
               <InputBase
-                autoFocus={true}
                 style={{ width: "75%" }}
                 value={msg}
                 onChange={(e) => {
