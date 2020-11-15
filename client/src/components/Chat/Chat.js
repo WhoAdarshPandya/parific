@@ -13,10 +13,12 @@ import {
   Typography,
   ListItemSecondaryAction,
   Popover,
+  Menu,
 } from "@material-ui/core";
 import Picker from "emoji-picker-react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { css } from "@emotion/css";
+import { CirclePicker } from "react-color";
 import SearchIcon from "@material-ui/icons/Search";
 import TelegramIcon from "@material-ui/icons/Telegram";
 import SecurityIcon from "@material-ui/icons/Security";
@@ -43,8 +45,12 @@ function Chat() {
   const [msg, setMsg] = useState("");
   const [isChatActive] = useState(true);
   const [openEmojiBoard, setEmojiBoard] = useState(false);
+  const [openOptions, setOpenOptions] = useState(false);
   const [isAnonymouschatActive, setIsAnonymousChatActive] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [secondAnchorEl, setSecondAnchorEl] = useState(null);
+  const [isColorSet, setColor] = useState(false);
+  const [colorValue, setColorValue] = useState("");
   const classes = useStyles();
   const [frnds, setFrnds] = useState([
     {
@@ -115,7 +121,10 @@ function Chat() {
     setEmojiBoard(true);
     setAnchorEl(event.currentTarget);
   };
-
+  const handleOptionClick = (event) => {
+    setOpenOptions(true);
+    setSecondAnchorEl(event.currentTarget);
+  };
   const onEmojiSelection = (event, emojiObject) => {
     setMsg((prev) => `${prev}${emojiObject.emoji}`);
   };
@@ -133,6 +142,14 @@ function Chat() {
       : document
           .getElementsByClassName("main_chatwin")[0]
           .classList.remove("anonymouschat");
+  };
+  const handleColorChangeComplete = (color) => {
+    document
+      .getElementsByClassName("main_chatwin")[0]
+      .classList.add("change-color");
+    setColor(true);
+    setColorValue(color.hex);
+    setOpenOptions(false);
   };
   return (
     <div className="chat_container">
@@ -182,7 +199,10 @@ function Chat() {
       </div>
       <div className="chat_window">
         {isChatActive ? (
-          <div className="main_chatwin">
+          <div
+            className="main_chatwin"
+            style={isColorSet ? { backgroundColor: colorValue } : null}
+          >
             <Paper elevation={0} variant="outlined" className="current_contact">
               <List style={{ paddingTop: "0px", paddingBottom: "0px" }}>
                 <ListItem style={{ paddingTop: "0px", paddingBottom: "0px" }}>
@@ -206,7 +226,7 @@ function Chat() {
                   />
                 </ListItem>
                 <ListItemSecondaryAction>
-                  <IconButton color="primary">
+                  <IconButton onClick={handleOptionClick} color="primary">
                     <MoreVertOutlinedIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -286,9 +306,38 @@ function Chat() {
                   horizontal: "left",
                 }}
               >
-                <Picker onEmojiClick={onEmojiSelection} />
+                <Picker preload={true} onEmojiClick={onEmojiSelection} />
               </Popover>
             ) : null}
+            {openOptions && (
+              <>
+                <Menu
+                  open={true}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  onBackdropClick={() => {
+                    setOpenOptions(false);
+                  }}
+                  onEscapeKeyDown={() => {
+                    setOpenOptions(false);
+                  }}
+                  keepMounted={true}
+                  anchorEl={secondAnchorEl}
+                >
+                  <p className="color-wel">choose your favorite color</p>
+                  <CirclePicker
+                    onChangeComplete={handleColorChangeComplete}
+                    className="color-picker-r"
+                  />
+                </Menu>
+              </>
+            )}
           </div>
         ) : (
           <div className="left-portion__hero ">
