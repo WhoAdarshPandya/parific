@@ -4,9 +4,16 @@ const {
   signupUserValidation,
   loginValidaton,
 } = require("../models/userValidatorModel");
-const userCollection = require("../models/userModel");
+const {
+  userModel: userCollection,
+  friendModel: friendCollection,
+  groupModel: groupCollection,
+  chatModel: chatCollection,
+  groupChatModel: groupChatCollection,
+} = require("../models/dbModels");
 const uuid = require("uuid");
-const mongoose = require("../config/dbconfig");
+// const mongoose = require("../config/dbconfig");
+require("../config/db_operations");
 const moment = require("moment");
 const { jwtTokenGenerator, authUser } = require("../config/jwtTokens");
 
@@ -33,6 +40,8 @@ router.post("/api/v1/signup", async (req, res) => {
         profile: req.body.profile,
         accountType: true,
         date: Date.now(),
+        blocked_users: [],
+        groups: [],
       },
     ])
     .then((ress) => {
@@ -106,6 +115,50 @@ router.get("/api/v1/getprofile", authUser, async (req, res) => {
     },
     success: true,
   });
+});
+
+router.get("/api/v1/frndtest", async (req, res) => {
+  // await groupChatCollection.insertMany(
+  //   [
+  //     {
+  //       group_id: uuid.v4(),
+  //       group_messages: [
+  //         {
+  //           group_chat_id: uuid.v4(),
+  //           sender_id: uuid.v4(),
+  //           sender_name: "adarsh",
+  //           text: "hello",
+  //           date: "date",
+  //           time: "time",
+  //         },
+  //         {
+  //           group_chat_id: uuid.v4(),
+  //           sender_id: uuid.v4(),
+  //           sender_name: "vinaya",
+  //           text: "hi",
+  //           date: "date",
+  //           time: "time",
+  //         },
+  //         {
+  //           group_chat_id: uuid.v4(),
+  //           sender_id: uuid.v4(),
+  //           sender_name: "ajay",
+  //           text: "hey",
+  //           date: "date",
+  //           time: "time",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  //   (err, doc) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log(doc);
+  //     }
+  //   }
+  // );
+  res.json({ msg: "ok" });
 });
 
 module.exports = router;
